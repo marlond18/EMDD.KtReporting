@@ -94,9 +94,9 @@ namespace Reporting
         }
 
         /// <summary>
-        /// Create the Word Document and write the pertinent items to it    
+        /// Create the Word Document and write the pertinent items to it
         /// </summary>
-        /// <param name="visible"></param>  
+        /// <param name="visible"></param>
         public void CreateWordDoc(bool visible = true)
         {
             try
