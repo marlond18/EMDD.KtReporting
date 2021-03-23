@@ -1,8 +1,7 @@
-﻿using Reporting.Line;
-using System;
+﻿using EMDD.Reporting.Line;
 using Microsoft.Office.Interop.Word;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Create a Graph
@@ -12,11 +11,15 @@ namespace Reporting
         /// <summary>
         /// Graph
         /// </summary>
-        public LineGraph() => throw new NotImplementedException("Still working on LineGraphs");
+        public LineGraph()
+        {
+#pragma warning disable RCS1079 // Throwing of new NotImplementedException.
+            throw new System.NotImplementedException("Still working on LineGraphs");
+#pragma warning restore RCS1079 // Throwing of new NotImplementedException.
+        }
 
         internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
         {
-
         }
     }
 }

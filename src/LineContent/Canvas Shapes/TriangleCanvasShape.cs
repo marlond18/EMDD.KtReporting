@@ -1,11 +1,9 @@
-﻿using Reporting.Line;
-using Word = Microsoft.Office.Interop.Word;
+﻿using Word = Microsoft.Office.Interop.Word;
 using Microsoft.Office.Interop.Word;
 using System;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
-
     /// <summary>
     /// Triangles for canvas
     /// </summary>

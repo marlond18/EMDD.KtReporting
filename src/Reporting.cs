@@ -1,6 +1,6 @@
-﻿using KtExtensions.NetStandard;
+﻿using KtExtensions;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Symbols

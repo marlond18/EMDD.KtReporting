@@ -1,8 +1,8 @@
-﻿using Reporting.Line;
+﻿using EMDD.Reporting.Line;
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Word;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// create shape containers

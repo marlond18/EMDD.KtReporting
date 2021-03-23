@@ -1,8 +1,8 @@
-﻿using Reporting.Line;
+﻿using EMDD.Reporting.Line;
 using Microsoft.Office.Interop.Word;
-using KtExtensions.NetStandard;
+using KtExtensions;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Line Content Text
@@ -33,7 +33,7 @@ namespace Reporting
         /// text to LineText
         /// </summary>
         /// <param name="text"></param>
-        public static implicit operator LineText(string text) => new LineText(text);
+        public static implicit operator LineText(string text) => new(text);
 
         internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
         {

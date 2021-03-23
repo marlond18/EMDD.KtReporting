@@ -1,4 +1,4 @@
-﻿namespace Reporting
+﻿namespace EMDD.Reporting
 {
     /// <summary>
     /// Collection of Math Display Shortcuts

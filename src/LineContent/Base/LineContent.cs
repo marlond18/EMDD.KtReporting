@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Word;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     namespace Line
     {

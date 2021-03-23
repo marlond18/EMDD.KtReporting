@@ -1,9 +1,9 @@
-﻿using Reporting.Line;
+﻿using EMDD.Reporting.Line;
 using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Picture Line for Paragraph

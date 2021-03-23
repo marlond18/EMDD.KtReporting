@@ -1,9 +1,9 @@
-﻿using Reporting.Line;
+﻿using EMDD.Reporting.Line;
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Word;
-using KtExtensions.NetStandard;
+using KtExtensions;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Create Table

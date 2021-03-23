@@ -6,7 +6,7 @@ using Word = Microsoft.Office.Interop.Word;
 using Microsoft.Office.Interop.Word;
 using System.Runtime.InteropServices;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Composition of paragraphs
@@ -108,7 +108,7 @@ namespace Reporting
                 oDoc.PageSetup.LeftMargin = 40;
                 oDoc.PageSetup.RightMargin = 40;
                 var oParag = oDoc.Content.Paragraphs.Add();
-                (new LineText(_title)).CreateLine(oParag.Range, WdOMathJc.wdOMathJcCenter, 20, 0, 10);
+                new LineText(_title).CreateLine(oParag.Range, WdOMathJc.wdOMathJcCenter, 20, 0, 10);
                 foreach (var paragraph in _paragraphs)
                 {
                     paragraph.WriteParagraph(oParag);

@@ -1,13 +1,11 @@
-﻿using KtExtensions;
-using Reporting.Line;
-using System;
+﻿using EMDD.Reporting.Line;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 using Microsoft.Office.Interop.Word;
 
-namespace Reporting
+namespace EMDD.Reporting
 {
     /// <summary>
     /// Compositions of Lines
