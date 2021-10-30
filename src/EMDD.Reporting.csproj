@@ -13,14 +13,15 @@
     <PackageIcon>emd2.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Microsoft word, wrapper,C#, EMDD, Extensions</PackageTags>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>D:\Programming Work\EMDD.KtReporting\build\</OutputPath>
+    <OutputPath>D:\Programming Work\EMDD.KtReporting\build\debug</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>D:\Reporting\build\</OutputPath>
+    <OutputPath>D:\Programming Work\EMDD.KtReporting\build\release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -45,11 +46,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EMDD.Kt.Extensions" Version="1.0.0" />
+    <PackageReference Include="EMDD.Kt.Extensions" Version="1.0.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\EMDD.Kt.Extensions\src\Images\emd2.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="image\emd2.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
