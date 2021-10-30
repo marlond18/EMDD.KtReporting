@@ -14,14 +14,16 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Microsoft word, wrapper,C#, EMDD, Extensions</PackageTags>
     <PackageIconUrl />
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>D:\Programming Work\EMDD.KtReporting\build\debug</OutputPath>
+    <OutputPath>..\build\debug</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>D:\Programming Work\EMDD.KtReporting\build\release</OutputPath>
+    <OutputPath>..\build\release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
