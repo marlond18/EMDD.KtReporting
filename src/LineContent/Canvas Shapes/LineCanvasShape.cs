@@ -26,7 +26,7 @@ namespace EMDD.Reporting
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="thickness"></param>
-        public LineCanvasShape((double x, double y) start, (double x, double y) end, double thickness = 1)
+        public LineCanvasShape((double x, double y) start, (double x, double y) end, uint tabLevel, double thickness = 1) :base(tabLevel)
         {
             _start = start;
             _end = end;

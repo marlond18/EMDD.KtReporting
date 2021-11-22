@@ -17,7 +17,7 @@ namespace EMDD.Reporting
         /// </summary>
         /// <param name="thickness"></param>
         /// <param name="points"></param>
-        public CurveCanvasShape(double thickness, params (double x, double y)[] points)
+        public CurveCanvasShape(double thickness, uint tabLevel, params (double x, double y)[] points) : base(tabLevel)
         {
             _points = points;
             _thickness = thickness;

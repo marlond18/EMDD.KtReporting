@@ -20,7 +20,7 @@ namespace EMDD.Reporting
         /// <param name="topLeftY"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public LineCanvas(double topLeftX, double topLeftY, double width, double height)
+        public LineCanvas(double topLeftX, double topLeftY, double width, double height, uint tabLevel): base(tabLevel)
         {
             _location = (topLeftX, topLeftY);
             _size = (width, height);
@@ -44,7 +44,7 @@ namespace EMDD.Reporting
         /// <param name="thickness"></param>
         public void AddLine((double x, double y) start, (double x, double y) end, double thickness = 1)
         {
-            AddShape(new LineCanvasShape(start, end, thickness));
+            AddShape(new LineCanvasShape(start, end, _tabIndex, thickness));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace EMDD.Reporting
         /// <param name="points"></param>
         public void AddCurve(params (double x, double y)[] points)
         {
-            AddShape(new CurveCanvasShape(1, points));
+            AddShape(new CurveCanvasShape(1, _tabIndex, points));
         }
 
         internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)

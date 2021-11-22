@@ -15,7 +15,7 @@
     <PackageTags>Microsoft word, wrapper,C#, EMDD, Extensions</PackageTags>
     <PackageIconUrl />
     <Nullable>annotations</Nullable>
-    <Version>1.0.0.1-beta</Version>
+    <Version>1.0.0.7-beta</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\build\debug</OutputPath>

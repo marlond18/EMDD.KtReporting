@@ -16,7 +16,7 @@ namespace EMDD.Reporting
         /// <param name="y"></param>
         /// <param name="w"></param>
         /// <param name="h"></param>
-        public TriangleCanvasShape(double x, double y, double w, double h)
+        public TriangleCanvasShape(double x, double y, double w, double h, uint tabLevel):base(tabLevel)
         {
             _vertex = (x, y);
             _width = w;

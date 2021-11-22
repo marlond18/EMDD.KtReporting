@@ -14,13 +14,19 @@ namespace EMDD.Reporting
     {
         private readonly string _title;
 
+        private readonly int _defaulttab;
+
+        private readonly uint _tabIndex;
+
         /// <summary>
         /// Initialize paragraph with the title
         /// </summary>
         /// <param name="pTitle"></param>
-        public Paragraph(string pTitle)
+        public Paragraph(string pTitle, int defaulttab, uint tabIndex)
         {
-            _title = string.IsNullOrEmpty(pTitle) ? " " : pTitle;
+            _title = pTitle;
+            _defaulttab = defaulttab;
+            _tabIndex = tabIndex;
             Content = new List<LineContent>();
         }
 
@@ -33,62 +39,72 @@ namespace EMDD.Reporting
         /// Add text to the paragraph
         /// </summary>
         /// <param name="val"></param>
-        public void AddText(string val)
+        public void AddText(string val, uint tabIndex)
         {
-            Content.Add(new LineText(val));
+            Content.Add(new LineText(val, tabIndex + _tabIndex));
         }
 
         /// <summary>
         /// Add Picture to the paragraph using bitmap
         /// </summary>
         /// <param name="val"></param>
-        public void AddPicture(Bitmap val)
+        public void AddPicture(Bitmap val, uint tabIndex)
         {
-            Content.Add(new LinePicture(val));
+            Content.Add(new LinePicture(val, tabIndex + _tabIndex));
         }
 
         /// <summary>
         /// Add picture to the paragraph using picture box of the name windows picturebox
         /// </summary>
         /// <param name="val"></param>
-        public void AddPicture(PictureBox val)
+        public void AddPicture(PictureBox val, uint tabIndex)
         {
-            Content.Add(new LinePicture(val));
+            Content.Add(new LinePicture(val, tabIndex + _tabIndex));
         }
 
         /// <summary>
         /// Add table to the paragraph using array
         /// </summary>
         /// <param name="val"></param>
-        public void AddTable(string[,] val)
+        public void AddTable(string[,] val, uint tabIndex)
         {
-            Content.Add(new LineTable(val));
+            Content.Add(new LineTable(val, tabIndex + _tabIndex));
         }
 
-        /// <summary>
-        /// add the table to the paragraph using line table
-        /// </summary>
-        /// <param name="val"></param>
-        public void AddTable(LineTable val)
-        {
-            Content.Add(val);
-        }
+        ///// <summary>
+        ///// add the table to the paragraph using line table
+        ///// </summary>
+        ///// <param name="val"></param>
+        //public void AddTable(LineTable val)
+        //{
+        //    Content.Add(val);
+        //}
 
-        /// <summary>
-        /// add shape canvas to the paragraph
-        /// </summary>
-        /// <param name="val"></param>
-        public void AddCanvas(LineCanvas val)
-        {
-            Content.Add(val);
-        }
+        ///// <summary>
+        ///// add shape canvas to the paragraph
+        ///// </summary>
+        ///// <param name="val"></param>
+        //public void AddCanvas(LineCanvas val)
+        //{
+        //    Content.Add(val);
+        //}
+
+        ///// <summary>
+        ///// Add Generic LineContemt
+        ///// </summary>
+        ///// <param name="line"></param>
+        //public void AddLineContent<T>(T line) where T : LineContent
+        //{
+        //    Content.Add(line);
+        //}
 
         internal void WriteParagraph(Word.Paragraph oParag)
         {
-            (new LineText(_title)).CreateLine(oParag.Range);
+            if (!string.IsNullOrEmpty(_title) && !string.IsNullOrWhiteSpace(_title))
+                new LineText(_title, 0).CreateLine(oParag.Range);
             foreach (var line in Content)
             {
-                line.CreateLine(oParag.Range, WdOMathJc.wdOMathJcLeft, 10, 15);
+                line.CreateLine(oParag.Range, WdOMathJc.wdOMathJcLeft, 10, _defaulttab);
             }
         }
     }

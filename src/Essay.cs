@@ -15,64 +15,38 @@ namespace EMDD.Reporting
     {
         private readonly string _title;
 
+        public float TopMargin { get; set; } = 40;
+        public float BottomMargin { get; set; } = 40;
+        public float LeftMargin { get; set; } = 40;
+        public float RightMargin { get; set; } = 40;
+
         /// <summary>
         /// Initialize with Title (heading)
         /// </summary>
         /// <param name="pTitle"></param>
         public Essay(string pTitle)
         {
-            _title = string.IsNullOrEmpty(pTitle) ? " " : pTitle;
+            _title = pTitle;
             _paragraphs = new List<Paragraph>();
-            NewParagraph();
+            NewParagraph("", 0, 0);
         }
 
         private readonly List<Paragraph> _paragraphs;
-        private Paragraph _currentParagraph;
 
         /// <summary>
         /// Create new Paragraph
         /// </summary>
         /// <param name="pTitle"></param>
-        public void NewParagraph(string pTitle = " ")
+        public Paragraph NewParagraph(string pTitle, int tabSpace, uint tabIndex)
         {
-            _currentParagraph = new Paragraph(pTitle);
+            var _currentParagraph = new Paragraph(pTitle, tabSpace, tabIndex);
             _paragraphs.Add(_currentParagraph);
+            return _currentParagraph;
         }
 
-        /// <summary>
-        /// Append a canvas to the current paragraph
-        /// </summary>
-        /// <param name="val"></param>
-        public void Append(LineCanvas val)
+        public void AddParagraph(Paragraph paragraph)
         {
-            _currentParagraph.AddCanvas(val);
-        }
-
-        /// <summary>
-        /// Add text to the current paragraph
-        /// </summary>
-        /// <param name="val"></param>
-        public void Append(string val)
-        {
-            _currentParagraph.AddText(val);
-        }
-
-        /// <summary>
-        /// Add Picture to the current paragraph
-        /// </summary>
-        /// <param name="val"></param>
-        public void Append(Bitmap val)
-        {
-            _currentParagraph.AddPicture(val);
-        }
-
-        /// <summary>
-        /// Add table to the current paragraph using array
-        /// </summary>
-        /// <param name="val"></param>
-        public void Append(string[,] val)
-        {
-            _currentParagraph.AddTable(val);
+            _paragraphs.Add(paragraph);
         }
 
         private Word.Application _oApp;
@@ -97,18 +71,19 @@ namespace EMDD.Reporting
         /// Create the Word Document and write the pertinent items to it
         /// </summary>
         /// <param name="visible"></param>
-        public void CreateWordDoc(bool visible = true)
+        public void CreateWordDoc()
         {
             try
             {
-                _oApp = new Word.Application { Visible = visible };
+                _oApp = new Word.Application { Visible = true };
                 var oDoc = _oApp.Documents.Add();
-                oDoc.PageSetup.TopMargin = 40;
-                oDoc.PageSetup.BottomMargin = 40;
-                oDoc.PageSetup.LeftMargin = 40;
-                oDoc.PageSetup.RightMargin = 40;
+                oDoc.PageSetup.TopMargin = TopMargin;
+                oDoc.PageSetup.BottomMargin = BottomMargin;
+                oDoc.PageSetup.LeftMargin = LeftMargin;
+                oDoc.PageSetup.RightMargin = RightMargin;
                 var oParag = oDoc.Content.Paragraphs.Add();
-                new LineText(_title).CreateLine(oParag.Range, WdOMathJc.wdOMathJcCenter, 20, 0, 10);
+                if (!string.IsNullOrEmpty(_title) && !string.IsNullOrWhiteSpace(_title))
+                    new LineText(_title, 0).CreateLine(oParag.Range, WdOMathJc.wdOMathJcCenter, 20, 0, 10);
                 foreach (var paragraph in _paragraphs)
                 {
                     paragraph.WriteParagraph(oParag);

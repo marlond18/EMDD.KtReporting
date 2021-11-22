@@ -9,6 +9,10 @@ namespace EMDD.Reporting
     /// </summary>
     public abstract class CanvasShapes : LineContent
     {
+        public CanvasShapes(uint tabLevel) : base(tabLevel)
+        {
+        }
+
         internal override void WriteLine(Word.Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
         {
             DrawShapeOnDoc(range.Document);

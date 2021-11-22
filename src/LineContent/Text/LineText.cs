@@ -18,7 +18,7 @@ namespace EMDD.Reporting
         /// initialize
         /// </summary>
         /// <param name="tContent"></param>
-        public LineText(string tContent)
+        public LineText(string tContent, uint tabLevel) : base(tabLevel)
         {
             _textContent = tContent.IsNull() || tContent.IsEmpty() ? " " : tContent;
         }
@@ -28,12 +28,6 @@ namespace EMDD.Reporting
         /// </summary>
         /// <param name="text"></param>
         public static implicit operator string(LineText text) => text._textContent;
-
-        /// <summary>
-        /// text to LineText
-        /// </summary>
-        /// <param name="text"></param>
-        public static implicit operator LineText(string text) => new(text);
 
         internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
         {

@@ -19,7 +19,7 @@ namespace EMDD.Reporting
         /// Initialize with picture
         /// </summary>
         /// <param name="pContent"></param>
-        public LinePicture(Bitmap pContent)
+        public LinePicture(Bitmap pContent, uint tabLevel):base(tabLevel)
         {
             _pictureContent = pContent;
         }
@@ -28,7 +28,7 @@ namespace EMDD.Reporting
         /// Initialize with control
         /// </summary>
         /// <param name="pBox"></param>
-        public LinePicture(Control pBox)
+        public LinePicture(Control pBox, uint tabLevel) : base(tabLevel)
         {
             var bmp = new Bitmap(pBox.Width, pBox.Height);
             pBox.DrawToBitmap(bmp, pBox.ClientRectangle);

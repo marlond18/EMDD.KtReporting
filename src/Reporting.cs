@@ -24,11 +24,18 @@ namespace EMDD.Reporting
     public static class MathStringBuilder
     {
         /// <summary>
+        /// Cases
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string ToCases(string[] str) => $"⁡{{█({str.BuildString("@")})┤";
+
+        /// <summary>
         /// Matrix
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string ToMatrix(this string[,] str) => "[■(" + str.SelectRows(row => row.BuildString("&")).BuildString("@") + ")]";
+        public static string ToMatrix(string[,] str) => "[■(" + str.SelectRows(row => row.BuildString("&")).BuildString("@") + ")]";
 
         /// <summary>
         /// intergral sign

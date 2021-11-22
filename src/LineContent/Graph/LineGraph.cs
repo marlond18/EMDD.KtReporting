@@ -11,7 +11,7 @@ namespace EMDD.Reporting
         /// <summary>
         /// Graph
         /// </summary>
-        public LineGraph()
+        public LineGraph(uint tabLevel) :base(tabLevel)
         {
 #pragma warning disable RCS1079 // Throwing of new NotImplementedException.
             throw new System.NotImplementedException("Still working on LineGraphs");

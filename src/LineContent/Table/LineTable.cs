@@ -34,7 +34,7 @@ namespace EMDD.Reporting
         /// Iniitialize
         /// </summary>
         /// <param name="pContent"></param>
-        public LineTable(string[,] pContent)
+        public LineTable(string[,] pContent, uint tabLevel) : base(tabLevel)
         {
             _content = pContent;
             _rowCount = _content.GetUpperBound(0);
