@@ -1,5 +1,4 @@
 ﻿using EMDD.Reporting.Line;
-using Microsoft.Office.Interop.Word;
 
 namespace EMDD.Reporting
 {
@@ -17,9 +16,9 @@ namespace EMDD.Reporting
             throw new System.NotImplementedException("Still working on LineGraphs");
 #pragma warning restore RCS1079 // Throwing of new NotImplementedException.
         }
-
-        internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
+        internal override void WriteToString(ref StringBuilder str)
         {
+            str.Append(new string('\t', (int)TabIndex)).AppendLine("<Graph Not converted To basic String>");
         }
     }
 }

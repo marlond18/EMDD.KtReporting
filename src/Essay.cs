@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using Word = Microsoft.Office.Interop.Word;
-using Microsoft.Office.Interop.Word;
-using System.Runtime.InteropServices;
+﻿using System.Text;
 
 namespace EMDD.Reporting
 {
@@ -13,12 +7,7 @@ namespace EMDD.Reporting
     /// </summary>
     public class Essay
     {
-        private readonly string _title;
-
-        public float TopMargin { get; set; } = 40;
-        public float BottomMargin { get; set; } = 40;
-        public float LeftMargin { get; set; } = 40;
-        public float RightMargin { get; set; } = 40;
+        public string Title { get; }
 
         /// <summary>
         /// Initialize with Title (heading)
@@ -26,12 +15,12 @@ namespace EMDD.Reporting
         /// <param name="pTitle"></param>
         public Essay(string pTitle)
         {
-            _title = pTitle;
-            _paragraphs = new List<Paragraph>();
+            Title = pTitle;
+            Paragraphs = new List<Paragraph>();
             NewParagraph("", 0, 0);
         }
 
-        private readonly List<Paragraph> _paragraphs;
+        public List<Paragraph> Paragraphs { get; }
 
         /// <summary>
         /// Create new Paragraph
@@ -40,61 +29,24 @@ namespace EMDD.Reporting
         public Paragraph NewParagraph(string pTitle, int tabSpace, uint tabIndex)
         {
             var _currentParagraph = new Paragraph(pTitle, tabSpace, tabIndex);
-            _paragraphs.Add(_currentParagraph);
+            Paragraphs.Add(_currentParagraph);
             return _currentParagraph;
         }
 
         public void AddParagraph(Paragraph paragraph)
         {
-            _paragraphs.Add(paragraph);
+            Paragraphs.Add(paragraph);
         }
 
-        private Word.Application _oApp;
-
-        /// <summary>
-        /// Close the related application
-        /// </summary>
-        public void KillApp()
+        public string ToCompleteString()
         {
-            try
+            var str = new StringBuilder();
+            str.AppendLine(Title);
+            foreach (var par in Paragraphs)
             {
-                if (_oApp?.Documents.Count > 0) _oApp?.Quit();
-                Marshal.FinalReleaseComObject(_oApp);
+                par.WriteToString(ref str);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        /// <summary>
-        /// Create the Word Document and write the pertinent items to it
-        /// </summary>
-        /// <param name="visible"></param>
-        public void CreateWordDoc()
-        {
-            try
-            {
-                _oApp = new Word.Application { Visible = true };
-                var oDoc = _oApp.Documents.Add();
-                oDoc.PageSetup.TopMargin = TopMargin;
-                oDoc.PageSetup.BottomMargin = BottomMargin;
-                oDoc.PageSetup.LeftMargin = LeftMargin;
-                oDoc.PageSetup.RightMargin = RightMargin;
-                var oParag = oDoc.Content.Paragraphs.Add();
-                if (!string.IsNullOrEmpty(_title) && !string.IsNullOrWhiteSpace(_title))
-                    new LineText(_title, 0).CreateLine(oParag.Range, WdOMathJc.wdOMathJcCenter, 20, 0, 10);
-                foreach (var paragraph in _paragraphs)
-                {
-                    paragraph.WriteParagraph(oParag);
-                }
-                _oApp.Visible = true;
-            }
-            catch (Exception ex)
-            {
-                KillApp();
-                MessageBox.Show(ex.Message);
-            }
+            return str.ToString();
         }
     }
 }

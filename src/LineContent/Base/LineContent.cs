@@ -1,4 +1,4 @@
-﻿using Microsoft.Office.Interop.Word;
+﻿using System.Text;
 
 namespace EMDD.Reporting
 {
@@ -9,21 +9,14 @@ namespace EMDD.Reporting
         /// </summary>
         public abstract class LineContent
         {
-            protected LineContent(uint tabLevel)
+            protected LineContent(uint tabIndex)
             {
-                _tabIndex = tabLevel;
+                TabIndex = tabIndex;
             }
 
-            internal readonly uint _tabIndex;
-            //internal abstract void WriteLineOpenXML(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0);
+            public uint TabIndex { get; }
 
-            internal abstract void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0);
-
-            internal void CreateLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
-            {
-                WriteLine(range, justify, fontsize, leftIndent * (int)_tabIndex, spaceAfter, bold);
-                range.InsertParagraphAfter();
-            }
+            internal abstract void WriteToString(ref StringBuilder str);
         }
     }
 }

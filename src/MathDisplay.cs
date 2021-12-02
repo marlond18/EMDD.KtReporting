@@ -14,7 +14,7 @@
         /// <returns></returns>
         public static string Sigma(string lowerLimit, string upperLimit, string expression)
         {
-            return $"∑_({lowerLimit})^({upperLimit})▒({expression}) ";
+            return $"∑_({lowerLimit})^({upperLimit})▒({expression})";
         }
     }
 }

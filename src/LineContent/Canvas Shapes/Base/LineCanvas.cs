@@ -1,6 +1,6 @@
 ﻿using EMDD.Reporting.Line;
-using System.Collections.Generic;
-using Microsoft.Office.Interop.Word;
+
+using System.Text;
 
 namespace EMDD.Reporting
 {
@@ -9,9 +9,9 @@ namespace EMDD.Reporting
     /// </summary>
     public class LineCanvas : LineContent
     {
-        private (double X, double Y) _location;
-        private (double Width, double Height) _size;
-        private readonly List<CanvasShapes> _shapes;
+        public (double X, double Y) Location { get; }
+        public (double Width, double Height) Size { get; }
+        public List<CanvasShapes> Shapes { get; }
 
         /// <summary>
         /// Initialize location and size
@@ -22,9 +22,9 @@ namespace EMDD.Reporting
         /// <param name="height"></param>
         public LineCanvas(double topLeftX, double topLeftY, double width, double height, uint tabLevel): base(tabLevel)
         {
-            _location = (topLeftX, topLeftY);
-            _size = (width, height);
-            _shapes = new List<CanvasShapes>();
+            Location = (topLeftX, topLeftY);
+            Size = (width, height);
+            Shapes = new List<CanvasShapes>();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace EMDD.Reporting
         /// <param name="shape"></param>
         public void AddShape(CanvasShapes shape)
         {
-            _shapes.Add(shape);
+            Shapes.Add(shape);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace EMDD.Reporting
         /// <param name="thickness"></param>
         public void AddLine((double x, double y) start, (double x, double y) end, double thickness = 1)
         {
-            AddShape(new LineCanvasShape(start, end, _tabIndex, thickness));
+            AddShape(new LineCanvasShape(start, end, TabIndex, thickness));
         }
 
         /// <summary>
@@ -53,21 +53,12 @@ namespace EMDD.Reporting
         /// <param name="points"></param>
         public void AddCurve(params (double x, double y)[] points)
         {
-            AddShape(new CurveCanvasShape(1, _tabIndex, points));
+            AddShape(new CurveCanvasShape(1, TabIndex, points));
         }
 
-        internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
+        internal override void WriteToString(ref StringBuilder str)
         {
-            var canvas = range.Document.Shapes.AddCanvas((float)_location.X, (float)_location.Y, (float)_size.Width, (float)_size.Height, range);
-            canvas.WrapFormat.Type = WdWrapType.wdWrapInline;
-            foreach (var shape in _shapes)
-            {
-                shape.DrawShapeOnCanvas(canvas.CanvasItems);
-            }
-            canvas.CanvasItems.SelectAll();
-            range.Application.Selection.Cut();
-            canvas.Delete();
-            range.PasteSpecial(DataType: WdPasteDataType.wdPasteEnhancedMetafile);
+            str.Append(new string('\t', (int)TabIndex)).AppendLine("<Canvas Not converted To basic String>");
         }
     }
 }

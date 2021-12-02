@@ -1,5 +1,5 @@
 ﻿using EMDD.Reporting.Line;
-using Microsoft.Office.Interop.Word;
+
 using KtExtensions;
 
 namespace EMDD.Reporting
@@ -12,7 +12,7 @@ namespace EMDD.Reporting
         /// <summary>
         /// Text Content
         /// </summary>
-        private readonly string _textContent;
+        public string TextContent { get; }
 
         /// <summary>
         /// initialize
@@ -20,27 +20,18 @@ namespace EMDD.Reporting
         /// <param name="tContent"></param>
         public LineText(string tContent, uint tabLevel) : base(tabLevel)
         {
-            _textContent = tContent.IsNull() || tContent.IsEmpty() ? " " : tContent;
+            TextContent = tContent.IsNull() || tContent.IsEmpty() ? " " : tContent;
         }
 
         /// <summary>
         /// LineText to Text
         /// </summary>
         /// <param name="text"></param>
-        public static implicit operator string(LineText text) => text._textContent;
+        public static implicit operator string(LineText text) => text.TextContent;
 
-        internal override void WriteLine(Range range, WdOMathJc justify = WdOMathJc.wdOMathJcLeft, int fontsize = 12, int leftIndent = 0, int spaceAfter = 0, int bold = 0)
+        internal override void WriteToString(ref StringBuilder str)
         {
-            if ((_textContent == null) || (_textContent?.Length == 0)) return;
-            range.Text = _textContent;
-            var mathRange = range.OMaths.Add(range);
-            var currentMath = mathRange.OMaths[1];
-            currentMath.Range.Font.Bold = bold;
-            currentMath.Range.Font.Size = fontsize;
-            currentMath.Justification = justify;
-            currentMath.BuildUp();
-            currentMath.Range.Paragraphs.LeftIndent = leftIndent;
-            currentMath.Range.Paragraphs.SpaceAfter = spaceAfter;
+            str.Append(new string('\t', (int)TabIndex)).AppendLine(TextContent);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace EMDD.Reporting
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string ToCases(string[] str) => $"⁡{{█({str.BuildString("@")})┤";
+        public static string ToCases(params string[] str) => $"⁡{{█({str.BuildString("@")})┤";
 
         /// <summary>
         /// Matrix
