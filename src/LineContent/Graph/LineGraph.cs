@@ -16,7 +16,7 @@ namespace EMDD.Reporting
             throw new System.NotImplementedException("Still working on LineGraphs");
 #pragma warning restore RCS1079 // Throwing of new NotImplementedException.
         }
-        internal override void WriteToString(ref StringBuilder str)
+        public override void WriteToString(ref StringBuilder str)
         {
             str.Append(new string('\t', (int)TabIndex)).AppendLine("<Graph Not converted To basic String>");
         }

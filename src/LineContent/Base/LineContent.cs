@@ -1,22 +1,15 @@
-﻿using System.Text;
-
-namespace EMDD.Reporting
+﻿namespace EMDD.Reporting.Line;
+/// <summary>
+/// Abstract Class for Line of Texts
+/// </summary>
+public abstract class LineContent
 {
-    namespace Line
+    protected LineContent(uint tabIndex)
     {
-        /// <summary>
-        /// Abstract Class for Line of Texts
-        /// </summary>
-        public abstract class LineContent
-        {
-            protected LineContent(uint tabIndex)
-            {
-                TabIndex = tabIndex;
-            }
-
-            public uint TabIndex { get; }
-
-            internal abstract void WriteToString(ref StringBuilder str);
-        }
+        TabIndex = tabIndex;
     }
+
+    public uint TabIndex { get; }
+
+    public abstract void WriteToString(ref StringBuilder str);
 }

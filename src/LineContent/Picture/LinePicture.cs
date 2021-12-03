@@ -23,7 +23,7 @@ namespace EMDD.Reporting
             PictureContent = pContent;
         }
 
-        internal override void WriteToString(ref StringBuilder str)
+        public override void WriteToString(ref StringBuilder str)
         {
             str.Append(new string('\t',(int)TabIndex)).AppendLine("<Picture Not converted To basic String>");
         }

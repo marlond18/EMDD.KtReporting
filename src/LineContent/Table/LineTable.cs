@@ -77,7 +77,7 @@ namespace EMDD.Reporting
             CellRange2Merge.Add(tempRange);
         }
 
-        internal override void WriteToString(ref StringBuilder str)
+        public override void WriteToString(ref StringBuilder str)
         {
             for (int i = 0; i < RowCount; i++)
             {

@@ -29,7 +29,7 @@ namespace EMDD.Reporting
         /// <param name="text"></param>
         public static implicit operator string(LineText text) => text.TextContent;
 
-        internal override void WriteToString(ref StringBuilder str)
+        public override void WriteToString(ref StringBuilder str)
         {
             str.Append(new string('\t', (int)TabIndex)).AppendLine(TextContent);
         }

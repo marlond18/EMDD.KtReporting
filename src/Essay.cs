@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace EMDD.Reporting
+﻿namespace EMDD.Reporting
 {
     /// <summary>
     /// Composition of paragraphs
